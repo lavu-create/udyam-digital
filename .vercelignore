@@ -1,0 +1,9 @@
+# Exclude local wheels and large archives
+python_libs/
+extracted/
+*.zip
+udyam_digital.db
+.git
+frontend/node_modules/
+submission/*.pptx
+submission/*.pdf

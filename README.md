@@ -2,13 +2,15 @@
 ## India's MSME Connectivity Journey, Simplified
 
 [![Airtel SYNC 2026](https://img.shields.io/badge/Airtel%20SYNC-2026%20Digital%20Track-E40000.svg)](https://unstop.com)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-udyam--digital.vercel.app-E40000.svg?logo=vercel)](https://udyam-digital-rho.vercel.app)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-udyam--digital-181717.svg?logo=github)](https://github.com/lavu-create/udyam-digital)
 [![DPDP Act 2023](https://img.shields.io/badge/Privacy-DPDP%20Act%202023%20Aligned-059669.svg)](docs/DPDP_PRIVACY_SECURITY.md)
 [![Test Suite](https://img.shields.io/badge/Tests-18%2F18%20Passing-brightgreen.svg)](backend/tests/test_system.py)
 [![License](https://img.shields.io/badge/License-Proprietary%20%2F%20Hackathon-blue.svg)]()
 
 > **Built for Airtel SYNC 2026 – Digital Track (Platform Partner: Unstop)**  
-> **Repository:** [https://github.com/lavu-create/udyam-digital](https://github.com/lavu-create/udyam-digital)  
+> **Live Web Application:** [https://udyam-digital-rho.vercel.app](https://udyam-digital-rho.vercel.app)  
+> **GitHub Repository:** [https://github.com/lavu-create/udyam-digital](https://github.com/lavu-create/udyam-digital)  
 > **Submission Deck:** Exactly 7 Slides (`submission/Project_Udyam_Digital.pptx` & `submission/Project_Udyam_Digital.pdf`)  
 > **Privacy Note:** 1-Page DPDP Act Compliance Document (`submission/DPDP_Privacy_Security_Note.pdf`)
 
@@ -86,7 +88,7 @@ The platform is engineered as a **modular monolith** optimized for local executi
    - Synthetic test harness evaluating all scenarios `K01`–`K12`.
 9. **DPDP Act 2023 Consent:** Standalone unbundled checkboxes, purpose specification, ISO 8601 UTC timestamp, and SHA-256 IP hashing.
 10. **Order Confirmation:** Instant generation of Order ID (`ORD-2026-XXXX`).
-11. **Real-Time Order Tracker:** Visual 5-stage progress milestone timeline with assigned lead technician details (Amit Sharma, +91 98765 43210).
+11. **Real-Time Order Tracker:** Visual 5-stage progress milestone timeline with simulated field technician attribution (*Simulated Field Tech, Demo Node #402, +91 98000 00000*).
 12. **Milestone Simulation:** Interactive button to advance order milestones in real time.
 
 ---
@@ -117,6 +119,26 @@ cd frontend
 npm run dev
 ```
 Open **[http://localhost:5173](http://localhost:5173)** in your browser!
+
+### Option C: Docker Containerization
+
+A self-contained, multi-stage production Docker image builds the React frontend with Node 20 and packages it with Python 3.11-slim:
+
+```bash
+# 1. Build the production Docker image
+docker build -t udyam-digital:latest .
+
+# 2. Run container (mapped to host port 8000)
+docker run -d -p 8000:8000 --name udyam-app udyam-digital:latest
+```
+Open **[http://localhost:8000](http://localhost:8000)**.
+
+### Option D: Cloud Deployment (Vercel & Render)
+
+The project includes pre-configured deployment blueprints:
+- **Vercel Serverless (Live):** Deployed at **[https://udyam-digital-rho.vercel.app](https://udyam-digital-rho.vercel.app)** with `vercel.json` routing and `api/index.py` serverless ASGI bridge.
+- **Render Web Service:** One-click deployment via `render.yaml` Blueprint using the root `Dockerfile`.
+- **Database Persistence Note:** In serverless runtime environments (such as Vercel AWS Lambda), the SQLite database initializes safely in the writable `/tmp` scratch filesystem (`/tmp/udyam_digital.db`). For persistent multi-instance production, the connection string seamlessly accepts standard PostgreSQL (`DATABASE_URL`).
 
 ---
 

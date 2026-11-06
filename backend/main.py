@@ -6,9 +6,10 @@ libs_path = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file_
 if libs_path not in sys.path:
     sys.path.insert(0, libs_path)
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse, JSONResponse
 from typing import List, Dict, Any
 
 from backend.database import engine, Base, SessionLocal
@@ -87,6 +88,7 @@ app.add_middleware(
 )
 
 @app.get("/health")
+@app.get("/api/health")
 def health_check():
     return {
         "status": "healthy",
@@ -153,6 +155,32 @@ def verify_kyc_pack(req: KYCVerifyPackRequest):
     result = ocr_service.verify_lead_pack(lead_id=lead_id, consent_given=req.consent_given)
     return result
 
+@app.post("/api/v1/kyc/upload-check")
+async def check_uploaded_document(file: UploadFile = File(...)):
+    # 1. Enforce 5MB size limit
+    content = await file.read()
+    if len(content) > 5 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="File size exceeds maximum 5MB limit.")
+
+    # 2. Enforce strict image/pdf MIME types
+    allowed_types = ["image/png", "image/jpeg", "image/webp", "application/pdf"]
+    if file.content_type not in allowed_types:
+        raise HTTPException(status_code=400, detail=f"Unsupported file format '{file.content_type}'. Please upload PNG, JPEG or PDF.")
+
+    # 3. Local in-memory Computer Vision quality assessment (zero cloud API leakage, zero disk persistence)
+    quality = ocr_service.assess_image_quality(content)
+    is_passed = not quality.get("is_blurry", False)
+
+    return {
+        "filename": file.filename,
+        "size_bytes": len(content),
+        "content_type": file.content_type,
+        "quality_metrics": quality,
+        "is_blurry": quality.get("is_blurry", False),
+        "status": "PASSED" if is_passed else "FLAGGED_BLURRY",
+        "notes": "Processed 100% in local memory; no file written to persistent storage."
+    }
+
 # ----------------- DPDP ACT CONSENT -----------------
 @app.post("/api/v1/consent/record", response_model=ConsentResponse)
 def record_consent(req: ConsentRequest, request: Request):
@@ -196,6 +224,22 @@ def advance_order_status(order_id: str):
     return order
 
 # Mount built React frontend if available
-frontend_dist = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "dist"))
-if os.path.exists(frontend_dist):
+candidate_dists = [
+    os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "dist")),
+    os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), "dist")),
+    os.path.abspath("./frontend/dist"),
+    os.path.abspath("./dist")
+]
+frontend_dist = next((d for d in candidate_dists if os.path.exists(d)), None)
+
+if frontend_dist:
     app.mount("/", StaticFiles(directory=frontend_dist, html=True), name="static")
+
+    @app.exception_handler(404)
+    async def spa_404_handler(request: Request, exc: Exception):
+        if request.url.path.startswith("/api/"):
+            return JSONResponse(status_code=404, content={"detail": f"API route '{request.url.path}' not found"})
+        index_file = os.path.join(frontend_dist, "index.html")
+        if os.path.exists(index_file):
+            return FileResponse(index_file)
+        return JSONResponse(status_code=404, content={"detail": "Not found"})

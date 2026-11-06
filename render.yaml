@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: udyam-digital
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: main
+    healthCheckPath: /health
+    autoDeploy: true
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: HOST
+        value: 0.0.0.0
+      - key: ENVIRONMENT
+        value: production
+      - key: ANCHOR_DATE
+        value: 2026-07-15
+      - key: MAX_BILL_AGE_DAYS
+        value: 90
+      - key: BLUR_LAPLACIAN_THRESHOLD
+        value: 250.0

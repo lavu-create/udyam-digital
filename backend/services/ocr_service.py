@@ -102,15 +102,22 @@ class OCRService:
             }
         }
 
-    def assess_image_quality(self, image_path: str) -> Dict[str, Any]:
-        if not os.path.exists(image_path):
-            return {"exists": False, "error": "File does not exist"}
-
+    def assess_image_quality(self, image_source: Any) -> Dict[str, Any]:
         try:
-            with Image.open(image_path) as img:
+            import io
+            if isinstance(image_source, str):
+                if not os.path.exists(image_source):
+                    return {"exists": False, "error": "File does not exist"}
+                img = Image.open(image_source)
+            elif isinstance(image_source, bytes):
+                img = Image.open(io.BytesIO(image_source))
+            else:
+                img = Image.open(image_source)
+
+            with img:
                 width, height = img.size
                 
-                # Check 1: Dimensions
+                # Check 1: Dimensions / Skew
                 is_standard = (width == 1240 and height == 1754)
                 is_rotated = (width == 1446 or height == 1894)
 
