@@ -44,42 +44,42 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ language, onStart 
           </div>
         </div>
 
-        {/* Key Metrics Grid */}
+        {/* Key Verified Metrics Grid */}
         <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-red-100">
           <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
             <div className="flex items-center space-x-1 text-slate-500 text-xs font-medium">
               <TrendingDown className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Acquisition Cost</span>
+              <span>Baseline CAC</span>
             </div>
-            <div className="text-lg font-black text-slate-900 mt-1">-70% CAC</div>
-            <div className="text-[10px] text-slate-400">₹15,053 → ₹4,200</div>
+            <div className="text-lg font-black text-slate-900 mt-1">₹15,053</div>
+            <div className="text-[10px] text-slate-400">Dataset blended baseline</div>
           </div>
 
           <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
             <div className="flex items-center space-x-1 text-slate-500 text-xs font-medium">
-              <Clock className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Turnaround Velocity</span>
+              <Clock className="w-3.5 h-3.5 text-amber-600" />
+              <span>Average Velocity</span>
             </div>
-            <div className="text-lg font-black text-slate-900 mt-1">2.5 Days</div>
-            <div className="text-[10px] text-slate-400">Down from 17.6 days</div>
+            <div className="text-lg font-black text-slate-900 mt-1">17.62 Days</div>
+            <div className="text-[10px] text-slate-400">Baseline onboarding delay</div>
+          </div>
+
+          <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
+            <div className="flex items-center space-x-1 text-slate-500 text-xs font-medium">
+              <Users className="w-3.5 h-3.5 text-blue-600" />
+              <span>Conversion Rate</span>
+            </div>
+            <div className="text-lg font-black text-slate-900 mt-1">7.36%</div>
+            <div className="text-[10px] text-slate-400">368 of 5,000 activated</div>
           </div>
 
           <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
             <div className="flex items-center space-x-1 text-slate-500 text-xs font-medium">
               <Shield className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Privacy & Trust</span>
+              <span>Privacy Standard</span>
             </div>
-            <div className="text-lg font-black text-slate-900 mt-1">100% Local</div>
-            <div className="text-[10px] text-slate-400">Zero cloud PII leakage</div>
-          </div>
-
-          <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
-            <div className="flex items-center space-x-1 text-slate-500 text-xs font-medium">
-              <Users className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Target Market</span>
-            </div>
-            <div className="text-lg font-black text-slate-900 mt-1">6.3 Cr</div>
-            <div className="text-[10px] text-slate-400">Indian MSMEs</div>
+            <div className="text-lg font-black text-slate-900 mt-1">DPDP Aligned</div>
+            <div className="text-[10px] text-slate-400">In-memory local checks</div>
           </div>
         </div>
       </div>
