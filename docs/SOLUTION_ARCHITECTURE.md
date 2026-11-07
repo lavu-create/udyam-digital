@@ -18,7 +18,7 @@ The architectural design of **Project Udyam Digital** is governed by practical e
    - The GenAI conversational advisor is built behind a pluggable **Adapter Interface**.
    - Supports live enterprise LLMs (Gemini, Claude, OpenAI) while providing a **100% deterministic local rule-based engine** when external API keys are unavailable. The application never breaks or stalls.
 3. **Self-Contained Local OCR & Verification Engine:**
-   - In accordance with DPDP Act 2023 principles, KYC documents and PII are never transmitted to external cloud computer vision APIs.
+   - Technical Privacy Alignment: Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment.
    - Uses local image preprocessing (sharpness check via Laplacian variance, deskewing) and structured regex extraction, backed by a deterministic test harness supporting all `K01`–`K12` edge cases.
 4. **Zero-Config Local Deployment with Cloud Portability:**
    - SQLite with SQLAlchemy ORM enables instant, zero-setup local demonstration without external database dependencies.
@@ -62,7 +62,7 @@ flowchart TD
 
     subgraph PersistenceLayer["Data Persistence & Security Vault"]
         AppDB[(SQLite / PostgreSQL\nOperational Database)]
-        DocVault[(AES-256 Encrypted\nTemporary Document Storage)]
+        DocVault[(In-Memory Evaluation\nNo External AI Forwarding)]
         AuditVault[(DPDP Immutable Audit\nLog Ledger)]
     end
 
@@ -188,7 +188,7 @@ sequenceDiagram
 | **Backend** | Python FastAPI | Django / Node.js Express | High-performance asynchronous execution, native OpenAPI/Swagger docs, seamless integration with Python OCR & data libraries. |
 | **Database** | SQLite + SQLAlchemy | MongoDB / PostgreSQL only | Zero configuration needed for local evaluation; SQLAlchemy abstraction allows instantaneous switch to PostgreSQL. |
 | **Advisor AI** | LLM Adapter + Rule Fallback | Cloud-Only LLM API | Allows demonstration using live Gemini/Claude when keys exist, while guaranteeing 100% offline uptime via deterministic rules. |
-| **OCR Engine** | Local Vision Pipeline + OpenCV | Tesseract / Google Vision API | No external cloud cost; no PII leakage; fully handles blur pre-checks, deskewing, and regex parsing offline. |
+| **OCR Engine** | Local Vision Pipeline + OpenCV | Tesseract / Google Vision API | No external cloud cost; no external AI API forwarding; handles blur pre-checks, deskewing, and regex parsing in memory. |
 | **Packaging** | Docker & Docker Compose | Manual virtualenv only | Single-command cross-platform reproducibility on any evaluator machine. |
 
 ---

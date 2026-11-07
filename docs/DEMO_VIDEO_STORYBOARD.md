@@ -6,6 +6,7 @@
 **Maximum Duration:** Strictly 3 Minutes (180 Seconds)  
 **Live Application URL:** [https://udyam-digital-rho.vercel.app](https://udyam-digital-rho.vercel.app)  
 **GitHub Repository:** [https://github.com/lavu-create/udyam-digital](https://github.com/lavu-create/udyam-digital)  
+**Demo Video Stream (Google Drive):** [https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing](https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing)  
 **Target Audience:** Hackathon Jury, Enterprise Architects & Business Strategy Panel  
 **Implementation Standard:** 100% Grounded in Live Application Features & Dataset Metrics (No Exaggerated or Unverified Claims)
 
@@ -17,7 +18,7 @@ All figures presented in this demonstration adhere strictly to the verified hack
 - **Baseline Funnel Metrics (Actual Dataset):** 5,000 total leads, 368 activations (**7.36% activation rate**), **₹15,053 blended CAC**, and **17.62-day average activation velocity**.
 - **Funnel Drop-Off Points (Actual Dataset):** 385 leads drop due to multi-day quote delays; 273 leads drop due to document and paperwork friction.
 - **Proposed Solution Target:** Replace manual field visits and paper chasing with self-serve digital discovery, sub-second registry checks, and transparent quote configuration.
-- **DPDP Act Alignment:** Software engineering technical controls (unbundled affirmative consent, purpose-specific notices, SHA-256 IP hashing, 30-day purge lifecycle). Not formal legal certification.
+- **DPDP Act Alignment:** Software engineering technical controls (unbundled affirmative consent, purpose-specific notices, SHA-256 IP hashing, in-memory local CV image evaluation). Not formal legal certification.
 - **Local Computer Vision:** In-memory Laplacian blur variance analysis (threshold 250.0) and orientation detection with synthetic scenario evaluation across `K01`–`K12`. Zero customer documents transmitted to external third-party cloud LLM APIs.
 - **Utility Bill Freshness:** Case-study validation rule enforcing a 90-day freshness threshold against the case anchor date (`2026-07-15`).
 - **Advisor Engine:** Deterministic, rule-grounded needs assessment without external LLM API dependencies.
@@ -47,14 +48,13 @@ All figures presented in this demonstration adhere strictly to the verified hack
 
 ## 3. Scene-by-Scene Script & Technical Directions
 
-### Scene 1: Problem & Solution Introduction (0:00 – 0:20) [20s]
+### Scene 1: Problem & Solution Introduction (0:00 – 0:27) [27s]
 - **Visual Setup:** Browser displaying `https://udyam-digital-rho.vercel.app` (Landing Screen). Cursor hovers over the verified funnel problem card and core solution pillars.
 - **On-Screen Captions:**
   - *Baseline: 7.36% Activation Rate (368 / 5,000 Leads) | ₹15,053 Blended CAC*
   - *Project Udyam Digital: Self-Serve Enterprise Telecom Onboarding*
 - **Audio / Voiceover (Founder Tone):**
-  > *"Namaste. In India, 6.3 crore MSMEs power 30% of our economy. Yet Airtel's dataset shows an enterprise activation rate of just 7.36%—with 5,000 leads taking an average of 17.6 days and costing ₹15,053 per acquired customer.*  
-  > *This is Project Udyam Digital: a self-serve platform built to simplify discovery, quotation, and KYC into a single digital session."*
+  > *"Namaste. In India, 6.3 crore MSMEs power 30 percent of our economy. Yet the case dataset shows an enterprise activation rate of just 7.36 percent, with 5,000 leads taking an average of 17.6 days and costing 15,053 rupees per acquired customer. This is Project Udyam Digital: a self-serve platform built to simplify discovery, quotation, and KYC into a single digital session."*
 - **Action:** Click **"Start 10-Minute Onboarding"**. Smooth transition to Step 1.
 
 ---
@@ -99,7 +99,7 @@ All figures presented in this demonstration adhere strictly to the verified hack
 - **On-Screen Captions:**
   - *Sub-Second Mock GSTIN Lookup (3,534 Records Indexed)*
   - *Local Computer Vision: Laplacian Blur Pre-Check & Orientation Detection*
-  - *K01–K12 Synthetic Test Harness | Zero External Cloud Transmission*
+  - *K01–K12 Synthetic Test Harness | No External AI API Forwarding*
 - **Action Sequence:**
   1. Click search on GSTIN `19EOGXH4115Y1ZL`: instantly display green badge *"Active GSTIN Verified: Joseph Shah (Prop. Harmony Dental Care)"*.
   2. In the Smart KYC Test Specimen selector, choose **K03 (Harmony Dental Care)** and click **"Run Smart KYC Validation"**:
@@ -112,7 +112,7 @@ All figures presented in this demonstration adhere strictly to the verified hack
 - **Audio / Voiceover:**
   > *"KYC is historically where 273 leads drop out due to paperwork friction. Watch our sub-second registry lookup verify the active GSTIN from over 3,500 indexed case records.*  
   > *For document verification, our local computer vision engine performs image-quality pre-checks. When we test specimen K04, the Laplacian blur detector flags an unreadable scan before submission. Specimen K11 is rejected because the electricity bill exceeds our 90-day case validation threshold.*  
-  > *Document quality is evaluated directly in server memory—ensuring zero sensitive customer files are leaked to public cloud AI."*
+  > *Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment."*
 - **Action:** Click **"Proceed to Consent & Placement"**.
 
 ---
@@ -121,7 +121,7 @@ All figures presented in this demonstration adhere strictly to the verified hack
 - **Visual Setup:** Step 6 (Statutory Consent Screen).
 - **On-Screen Captions:**
   - *DPDP Act 2023 Technical Alignment: Unbundled Affirmative Consent*
-  - *Immutable SHA-256 IP Hash & ISO 8601 Audit Ledger | 30-Day Purge Lifecycle*
+  - *Immutable SHA-256 IP Hash & ISO 8601 Audit Ledger | In-Memory Evaluation*
 - **Action Sequence:**
   1. Highlight the green Data Fiduciary declaration notice.
   2. Highlight the 3 unbundled, granular checkboxes:
@@ -131,7 +131,7 @@ All figures presented in this demonstration adhere strictly to the verified hack
   3. Click **"Accept & Place Order"**.
 - **Audio / Voiceover:**
   > *"Next, our consent architecture aligns with the technical principles of India's Digital Personal Data Protection Act, 2023.*  
-  > *Consent is unbundled, explicit, and presented in the customer's selected language. Upon affirmative opt-in, the system logs an immutable UTC timestamp and a SHA-256 hash of the client IP into an encrypted ledger, with temporary documents queued for automated purge."*
+  > *Consent is unbundled, explicit, and presented in the customer's selected language. Upon affirmative opt-in, the system logs an immutable UTC timestamp and a SHA-256 hash of the client IP into the audit ledger, keeping all processing strictly in temporary application memory."*
 
 ---
 

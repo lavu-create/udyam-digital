@@ -131,7 +131,7 @@
 - **Granular Checkboxes:**
   - [x] "I consent to Airtel verifying my GSTIN and Udyam business details."
   - [x] "I consent to my installation address proof being verified for network connectivity."
-  - [x] "I agree that KYC documents will be purged 30 days after activation."
+  - [x] "I understand that document verification is processed strictly for statutory telecom onboarding."
 - **Verification:** Proprietor OTP verification or mobile e-signature confirmation.
 
 ### Step 14: Order Confirmation & Provisioning Kickoff

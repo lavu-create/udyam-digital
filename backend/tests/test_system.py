@@ -6,7 +6,7 @@ root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 libs_dir = os.path.join(root_dir, "python_libs")
 if root_dir not in sys.path:
     sys.path.insert(0, root_dir)
-if libs_dir not in sys.path:
+if os.path.exists(libs_dir) and libs_dir not in sys.path:
     sys.path.insert(0, libs_dir)
 
 from backend.database import engine, Base
@@ -169,6 +169,24 @@ def test_dpdp_consent_and_orders():
     assert len(order["milestones"]) == 5
     assert "Simulated Field Tech" in order["technician_name"]
     print(f"  ✓ Order created: {order['order_id']} with 5 provisioning milestones")
+
+import unittest
+
+class SystemIntegrationTests(unittest.TestCase):
+    def test_01_catalog_skus_and_dependencies(self):
+        test_catalog_skus_and_dependencies()
+
+    def test_02_mock_registries(self):
+        test_mock_registries()
+
+    def test_03_advisor(self):
+        test_advisor()
+
+    def test_04_smart_kyc_and_edge_cases(self):
+        test_smart_kyc_and_edge_cases()
+
+    def test_05_dpdp_consent_and_orders(self):
+        test_dpdp_consent_and_orders()
 
 if __name__ == "__main__":
     test_catalog_skus_and_dependencies()

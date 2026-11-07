@@ -131,7 +131,7 @@ Based on empirical analysis of the 5,000-lead cohort in `smb_leads.csv`, the pla
 - **F-11.2:** Image Quality Pre-check:
   - Blur Detection: Computes Laplacian variance. Rejects images below sharpness threshold (trapping blurry uploads like `K04`).
   - Auto-Deskewing: Detects orientation and rotation angles, correcting skewed documents like `K02`.
-- **F-11.3:** Local OCR Engine: Extracts structured fields (Consumer Number, Supply Address, Bill Date, Signatory Name) without transmitting images to external third-party APIs.
+- **F-11.3:** In-Memory Vision & Verification Engine: Evaluates image quality (sharpness, rotation) and validates structured fields in memory without forwarding customer documents to external third-party AI APIs.
 
 ### Step 12: KYC Validation & Exception Handling (`FR-10`)
 - **F-12.1:** Freshness Validation: Validates that address proof / electricity bills are dated within 90 days of the fixed baseline date **2026-07-15**. Rejects expired documents (trapping `K11` electricity bill dated 2025-10-31).
@@ -145,7 +145,7 @@ Based on empirical analysis of the 5,000-lead cohort in `smb_leads.csv`, the pla
   1. Identity verification via GSTIN/Udyam registries.
   2. Installation address verification via utility bill.
   3. Service provisioning and communication via WhatsApp/SMS.
-- **F-13.3:** Displays exact data retention policy (KYC images auto-deleted after 30 days post-provisioning).
+- **F-13.3:** Displays exact data processing notice (documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs; production roadmap specifies HSM encryption and 30-day purge post-activation).
 - **F-13.4:** Digital signature or OTP verification capture.
 
 ### Step 14: Order Confirmation & Provisioning Kickoff (`FR-12`)
@@ -174,9 +174,9 @@ Based on empirical analysis of the 5,000-lead cohort in `smb_leads.csv`, the pla
 
 ### 5.2 Security & Privacy (DPDP Act, 2023)
 - **NFR-S1:** TLS 1.3 encryption in transit for all client-server communications.
-- **NFR-S2:** AES-256 encryption at rest for database and temporary document storage.
+- **NFR-S2:** Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment.
 - **NFR-S3:** PII Data Masking: Aadhaar, PAN, and signatory IDs masked in logs and client UI.
-- **NFR-S4:** Zero External Leakage: No customer documents or PII sent to external third-party AI APIs.
+- **NFR-S4:** No External AI Forwarding: Customer documents and PII are not forwarded to external third-party AI APIs.
 
 ### 5.3 Reliability & Local Execution
 - **NFR-R1:** 100% self-contained local execution capability without requiring paid cloud API keys or external services.

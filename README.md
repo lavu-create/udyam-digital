@@ -6,13 +6,13 @@
 [![GitHub Repository](https://img.shields.io/badge/GitHub-udyam--digital-181717.svg?logo=github)](https://github.com/lavu-create/udyam-digital)
 [![DPDP Act 2023](https://img.shields.io/badge/Privacy-DPDP%20Act%202023%20Aligned-059669.svg)](docs/DPDP_PRIVACY_SECURITY.md)
 [![Test Suite](https://img.shields.io/badge/Tests-18%2F18%20Passing-brightgreen.svg)](backend/tests/test_system.py)
-[![License](https://img.shields.io/badge/License-Proprietary%20%2F%20Hackathon-blue.svg)]()
 
 > **Built for Airtel SYNC 2026 – Digital Track (Platform Partner: Unstop)**  
 > **Live Web Application:** [https://udyam-digital-rho.vercel.app](https://udyam-digital-rho.vercel.app)  
 > **GitHub Repository:** [https://github.com/lavu-create/udyam-digital](https://github.com/lavu-create/udyam-digital)  
-> **Submission Deck:** Exactly 7 Slides (`submission/Project_Udyam_Digital.pptx` & `submission/Project_Udyam_Digital.pdf`)  
-> **Privacy Note:** 1-Page DPDP Act Compliance Document (`submission/DPDP_Privacy_Security_Note.pdf`)
+> **Product Demonstration Video (Google Drive):** [https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing](https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing)  
+> **Submission Presentation Deck:** Exactly 7 Slides ([`submission/Project_Udyam_Digital.pptx`](submission/Project_Udyam_Digital.pptx) & [`submission/Project_Udyam_Digital.pdf`](submission/Project_Udyam_Digital.pdf))  
+> **Privacy Note:** 1-Page DPDP Act Technical Alignment Document ([`submission/DPDP_Privacy_Security_Note.pdf`](submission/DPDP_Privacy_Security_Note.pdf))
 
 ---
 
@@ -23,11 +23,11 @@ India is home to **6.3 crore Micro, Small, and Medium Enterprises (MSMEs)** cont
 - **₹15,053 Blended CAC:** Driven by repetitive field visits, manual document pickups, and status chasing.
 - **17.62 Days Average Velocity:** 385 leads drop due to multi-day quote delays; 273 leads drop due to paperwork friction.
 
-**Project Udyam Digital** replaces physical paperwork and sales delay with a **mobile-first, AI-assisted self-serve platform**:
-- **-70% CAC Reduction:** Blended acquisition cost drops from ₹15,053 to ₹4,200–₹4,500.
-- **10-Minute Digital Onboarding:** Replaces 17.6-day turnaround with instant quote calculation and sub-second digital KYC.
-- **2.5x Funnel Lift:** Projected conversion increase to 18.5%–22.0% by removing visit-scheduling and quote friction.
-- **100% DPDP Act 2023 Compliance:** Zero customer document transmission to external cloud AI APIs; 30-day automated purge lifecycle.
+**Project Udyam Digital** addresses manual sales bottlenecks with a **mobile-first, self-serve digital onboarding architecture**:
+- **Targeted CAC Reduction (Proposed Target):** Replaces repetitive in-person sales visits, manual paperwork pickups, and physical quote iterations with digital self-serve discovery, targeting a reduction from the baseline ₹15,053 blended acquisition cost.
+- **10-Minute Digital Onboarding (Product Vision):** An intuitive end-to-end user journey designed to compress the multi-day turnaround into a single sitting with instant catalog validation and sub-second mock registry lookups.
+- **Projected Funnel Conversion Lift:** Aims to improve the lead-to-activation conversion from the dataset baseline of 7.36% (368 activations out of 5,000 leads) by eliminating multi-day quote delays (385 leads lost) and document collection friction (273 leads lost).
+- **DPDP Act 2023 Technical Alignment:** Demonstrates privacy-by-design engineering controls (explicit unbundled affirmative consent, purpose notices, one-way SHA-256 client IP hash logging, and in-memory document evaluation without external third-party AI API forwarding). Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment.
 
 ---
 
@@ -61,8 +61,8 @@ The platform is engineered as a **modular monolith** optimized for local executi
 └───────────────────────────────────────────┬─────────────────────────────────────────────┘
                                             │ SQLite / SQLAlchemy ORM
 ┌───────────────────────────────────────────▼─────────────────────────────────────────────┐
-│                            PERSISTENCE & SECURITY VAULT                                 │
-│            SQLite (udyam_digital.db) • AES-256 Encrypted 30-Day Temp Vault              │
+│                       PERSISTENCE & PRIVACY ARCHITECTURE                                │
+│      SQLite (udyam_digital.db) • In-Memory Assessment (No Third-Party AI Forwarding)    │
 └─────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -70,10 +70,10 @@ The platform is engineered as a **modular monolith** optimized for local executi
 
 ## 3. Core Feature Walkthrough (The 12-Screen Journey)
 
-1. **Landing Page:** Value proposition, quantified impact metrics (-70% CAC, 10-min onboarding), and call-to-action.
+1. **Landing Page:** Value proposition, verified baseline funnel metrics (₹15,053 blended CAC, 17.62-day average velocity, 7.36% activation rate), and call-to-action.
 2. **Bilingual Switcher:** Instant, zero-latency toggling between **English** and **हिंदी** across all UI elements.
 3. **Business Profile:** Business segment selector (Retail, Healthcare Clinic, Multi-Site, Manufacturing), staff slider, and city tier.
-4. **Conversational AI Advisor:** WhatsApp-style interactive chat with quick suggestion chips and 100% deterministic rule-based fallback without external API keys.
+4. **Conversational AI Advisor:** WhatsApp-style interactive chat with quick suggestion chips and deterministic, rule-grounded recommendations without external LLM API dependencies.
 5. **Tailored Bundles:** 3 pre-configured transparent packages:
    - *Starter / Micro Retail:* 100 Mbps Fibre + Business SIM → **₹1,298/mo**
    - *Growth / Clinic Practice:* 300 Mbps Fibre + Static IP + Cloud CCTV + Cloud Backup → **₹2,597/mo**
@@ -83,9 +83,9 @@ The platform is engineered as a **modular monolith** optimized for local executi
 8. **Smart KYC & Computer Vision:**
    - Real **Laplacian variance blur pre-check** (`K04` trapped).
    - Dimension-based **rotation & skew detector** (`K02` trapped).
-   - Utility bill **90-day expiry threshold** against anchor `2026-07-15` (`K11` trapped).
+   - Utility bill **90-day expiry threshold** against case anchor `2026-07-15` (`K11` trapped).
    - Character mismatch detector (`K06` trapped) and legal name mismatch detector (`K07` trapped).
-   - Synthetic test harness evaluating all scenarios `K01`–`K12`.
+   - Synthetic test harness evaluating all scenarios `K01`–`K12` directly in memory without external third-party AI transmission.
 9. **DPDP Act 2023 Consent:** Standalone unbundled checkboxes, purpose specification, ISO 8601 UTC timestamp, and SHA-256 IP hashing.
 10. **Order Confirmation:** Instant generation of Order ID (`ORD-2026-XXXX`).
 11. **Real-Time Order Tracker:** Visual 5-stage progress milestone timeline with simulated field technician attribution (*Simulated Field Tech, Demo Node #402, +91 98000 00000*).
@@ -99,23 +99,37 @@ The platform is engineered as a **modular monolith** optimized for local executi
 - Python 3.9+ installed
 - Node.js v18+ and npm installed
 
-### Option A: Unified Full-Stack Run (FastAPI + Bundled React)
-The backend automatically serves the built frontend from `frontend/dist`:
+### Option A: Standard Virtual Environment Run (Recommended)
 
 ```bash
-# 1. Run Backend Server (port 8000)
-PYTHONPATH="./python_libs:." python3 -m uvicorn backend.main:app --port 8000 --host 127.0.0.1
+# 1. Create and activate Python virtual environment
+python3 -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# 2. Install backend dependencies
+pip install -r requirements.txt
+
+# 3. Build frontend production assets
+cd frontend
+npm ci
+npm run build
+cd ..
+
+# 4. Launch unified server (FastAPI serves compiled frontend from frontend/dist)
+python3 -m uvicorn backend.main:app --host 0.0.0.0 --port 8000
 ```
 Open **[http://localhost:8000](http://localhost:8000)** in your browser!
 
 ### Option B: Development Mode (Hot Reloading)
 
 ```bash
-# Terminal 1: Backend
-PYTHONPATH="./python_libs:." python3 -m uvicorn backend.main:app --port 8000 --host 127.0.0.1
+# Terminal 1: Backend API
+source .venv/bin/activate
+uvicorn backend.main:app --reload --port 8000
 
 # Terminal 2: Frontend (Vite Dev Server)
 cd frontend
+npm ci
 npm run dev
 ```
 Open **[http://localhost:5173](http://localhost:5173)** in your browser!
@@ -147,7 +161,7 @@ The project includes pre-configured deployment blueprints:
 Run the 18 architectural assertion tests verifying catalog rules, mock registries, computer vision traps, and order provisioning:
 
 ```bash
-PYTHONPATH="./python_libs:." python3 backend/tests/test_system.py
+python3 backend/tests/test_system.py
 ```
 
 ### Verified Test Assertions:
@@ -217,7 +231,7 @@ ALL 18 ARCHITECTURAL ASSERTION TESTS PASSED!
 | **Catalog Engine** | 25 SKUs loaded, 7 dependency rules, 10 GSTIN rules | Dynamic ERP pricing sync via SAP/Ariba API |
 | **Advisor** | WhatsApp-style chat, bilingual EN/HI, deterministic fallback | Real-time speech-to-speech STT/TTS in 11 Indian languages |
 | **KYC & OCR** | Local CV (Laplacian blur, auto-deskew, bill age check, K01-K12) | Government Sandbox live GSTIN/MCA21 webhooks |
-| **DPDP Compliance** | Affirmative consent checkboxes, SHA-256 IP hash, audit logs | Automated crypto-vault shredder with HSM keys |
+| **DPDP Compliance** | Affirmative consent checkboxes, SHA-256 IP hash, audit logs | Automated crypto-vault shredder with HSM keys (Production Roadmap) |
 | **Order Tracking** | 5 visual milestones, technician card, simulated status advance | Field Force GPS live technician vehicle tracking on map |
 | **Partner Console** | Architectural specification & attribution QR schema | Production dealer portal with drop-recovery pipeline |
 
@@ -226,40 +240,47 @@ ALL 18 ARCHITECTURAL ASSERTION TESTS PASSED!
 ## 8. Technical Disclosures, Disclaimers & Known Limitations
 
 1. **Local Computer Vision vs. Production OCR:**  
-   The platform implements genuine local computer vision algorithms using NumPy and Pillow for **Laplacian blur variance measurement** (threshold 250.0), **skew and orientation estimation**, and **statutory utility bill freshness validation** against the case anchor date (`2026-07-15`). Full raster OCR text extraction is simulated against known benchmark test profiles (`K01`–`K12`) because heavy native neural OCR engines (such as Tesseract or Apple Vision) are not bundled in this offline sandbox. Customer documents are strictly prohibited from being transmitted to external third-party cloud LLM APIs, ensuring zero cloud PII leakage.
+   The platform implements genuine local computer vision algorithms using NumPy and Pillow for **Laplacian blur variance measurement** (threshold 250.0), **skew and orientation estimation**, and **statutory utility bill freshness validation** against the case anchor date (`2026-07-15`). Full raster OCR text extraction is simulated against known benchmark test profiles (`K01`–`K12`) because heavy native neural OCR engines (such as Tesseract or Apple Vision) are not bundled in this offline sandbox. Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment.
 
 2. **Simulated Provisioning & Demonstration Data:**  
    Order milestone progression (`KYC_VERIFIED` → `FEASIBILITY_CLEARED` → `EQUIPMENT_DISPATCHED` → `INSTALLATION_SCHEDULED` → `SERVICE_ACTIVE`), technician attribution (*Simulated Field Tech, Demo Node #402*), and appointment times are interactive demonstration simulations. Real-world carrier activation would interface with Airtel's production OSS/BSS and field workforce management systems.
 
 3. **Statutory Privacy Scope (DPDP Act, 2023):**  
-   The architecture demonstrates concrete **software engineering controls** (unbundled affirmative consent checkboxes, one-way SHA-256 IP hash logging, AES-256 encrypted storage, 30-day purge lifecycle, and dynamic PII masking) aligned with the statutory principles of India's *Digital Personal Data Protection (DPDP) Act, 2023*. This constitutes a technical architectural blueprint and prototype implementation, not formal legal certification.
+   The architecture demonstrates concrete **software engineering controls** (unbundled affirmative consent checkboxes, one-way SHA-256 IP hash logging, and in-memory evaluation without external third-party AI API forwarding) aligned with the statutory principles of India's *Digital Personal Data Protection (DPDP) Act, 2023*. Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment. Proposed production features such as Hardware Security Module (HSM) envelope encryption (AES-256-GCM) and automated cryptographic shredding are architectural roadmap specifications for commercial rollout, not implemented code assertions in this demonstration prototype. This constitutes a technical architectural blueprint and prototype implementation, not formal legal certification.
 
 4. **Synthetic Registries & Case Dataset Attribution:**  
-   The application queries indexed synthetic benchmarks (`mock_gstin_registry.csv` with 3,534 records and `mock_udyam_registry.csv` with 2,723 records) provided by the Airtel SYNC 2026 hackathon case package, rather than live production government GSTN or MCA21 endpoints. All applicant records and company names are synthetic.
+   The application queries indexed synthetic benchmarks (`mock_gstin_registry.csv` with 3,534 records and `mock_udyam_registry.csv` with 2,723 records) provided by the Airtel SYNC 2026 hackathon case package, rather than live production government GSTN or MCA21 endpoints. All applicant records and company names are synthetic demonstration fixtures.
 
 ---
 
 ## 9. Hackathon Submission Package Checklist
 
-- [x] **7-Slide Presentation (PPTX):** [`submission/Project_Udyam_Digital.pptx`](submission/Project_Udyam_Digital.pptx) (1.31 MB)
-- [x] **7-Page Matching PDF:** [`submission/Project_Udyam_Digital.pdf`](submission/Project_Udyam_Digital.pdf) (1.64 MB)
+- [x] **7-Slide Presentation (PPTX):** [`submission/Project_Udyam_Digital.pptx`](submission/Project_Udyam_Digital.pptx) (1.33 MB)
+- [x] **7-Page Matching PDF:** [`submission/Project_Udyam_Digital.pdf`](submission/Project_Udyam_Digital.pdf) (840 KB)
 - [x] **1-Page DPDP Privacy Note (PDF):** [`submission/DPDP_Privacy_Security_Note.pdf`](submission/DPDP_Privacy_Security_Note.pdf) (5.34 KB)
-- [x] **Demo Video Storyboard (3 Mins):** [`docs/DEMO_VIDEO_STORYBOARD.md`](docs/DEMO_VIDEO_STORYBOARD.md)
+- [x] **Product Demonstration Video (Google Drive):** [https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing](https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing)
+- [x] **Demo Video Storyboard & Script:** [`docs/DEMO_VIDEO_STORYBOARD.md`](docs/DEMO_VIDEO_STORYBOARD.md)
+- [x] **Security & Privacy Policy:** [`SECURITY.md`](SECURITY.md)
+- [x] **Deployment Guide:** [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)
+- [x] **Repository Security & Privacy Audit:** [`docs/REPOSITORY_SECURITY_AUDIT.md`](docs/REPOSITORY_SECURITY_AUDIT.md)
 - [x] **Data Sources & Citations:** [`submission/SLIDE_CONTENT_AND_SOURCES.md`](submission/SLIDE_CONTENT_AND_SOURCES.md)
 - [x] **Product Requirements Document:** [`docs/PRODUCT_REQUIREMENTS.md`](docs/PRODUCT_REQUIREMENTS.md)
 - [x] **Solution Architecture Blueprint:** [`docs/SOLUTION_ARCHITECTURE.md`](docs/SOLUTION_ARCHITECTURE.md)
 - [x] **Data Privacy Blueprint:** [`docs/DPDP_PRIVACY_SECURITY.md`](docs/DPDP_PRIVACY_SECURITY.md)
 - [x] **GitHub Repository:** [https://github.com/lavu-create/udyam-digital](https://github.com/lavu-create/udyam-digital) (Embedded QR & Clickable Links on Slide 7)
-- [x] **Demo Video Placeholder:** Clean reserved container on Slide 7 (ready for video URL)
 
 ---
 
-## 10. Contributors & Attribution
+## 10. License & Terms of Use
+
+**No open-source license has been granted for this repository.** All rights reserved. The codebase, architectural designs, dataset analysis, and presentation materials are proprietary and provided strictly for evaluation by the judges of the **Airtel SYNC 2026** competition. Redistribution, sublicensing, commercialization, or public mirroring without prior written authorization is prohibited.
+
+---
+
+## 11. Contributors & Attribution
 
 - **Track:** Airtel SYNC 2026 – Digital Track
 - **Platform Partner:** Unstop
 - **Project Lead:** Project Udyam Digital Team
 - **Case Reference:** Enterprise Track A (Author: Ankit Srivastava)
-- **Competition:** Airtel SYNC 2026 – Digital Track
-- **Platform Partner:** Unstop
 

@@ -66,7 +66,7 @@ export const translations = {
     kycRejected: "Document Rejected — Action Required",
     // Consent
     consentTitle: "DPDP Act, 2023 Statutory Consent",
-    consentNotice: "In accordance with Section 6 of India's Digital Personal Data Protection Act, 2023, your personal and business data is processed solely for statutory telecom provisioning. Documents are encrypted and purged after 30 days.",
+    consentNotice: "In accordance with Section 6 of India's Digital Personal Data Protection Act, 2023, your personal and business data is processed solely for statutory telecom provisioning. Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment.",
     consentCheck1: "I authorize Airtel to verify registration details with GSTIN and Udyam databases.",
     consentCheck2: "I agree to premises verification for optical fiber installation.",
     confirmOrder: "Accept & Place Order",
@@ -143,7 +143,7 @@ export const translations = {
     kycRejected: "दस्तावेज अस्वीकृत — सुधार आवश्यक",
     // Consent
     consentTitle: "डीपीडीपी अधिनियम, 2023 वैधानिक सहमति",
-    consentNotice: "भारत के डिजिटल व्यक्तिगत डेटा संरक्षण (डीपीडीपी) अधिनियम 2023 की धारा 6 के अनुसार, आपका डेटा केवल दूरसंचार कनेक्शन के लिए उपयोग किया जाता है। दस्तावेज सुरक्षित हैं और 30 दिनों बाद स्वतः हटा दिए जाते हैं।",
+    consentNotice: "भारत के डिजिटल व्यक्तिगत डेटा संरक्षण (डीपीडीपी) अधिनियम 2023 की धारा 6 के अनुसार, आपका डेटा केवल दूरसंचार कनेक्शन के लिए उपयोग किया जाता है। दस्तावेज़ होस्ट किए गए बैकएंड द्वारा मेमोरी में संसाधित किए जाते हैं और बाहरी तीसरे पक्ष के AI एपीआई को अग्रेषित नहीं किए जाते हैं। उत्पादन परिनियोजन के लिए आगे सुरक्षा और प्रतिधारण मूल्यांकन की आवश्यकता है।",
     consentCheck1: "मैं एयरटेल को जीएसटीआईएन और उद्यम डेटाबेस से विवरण सत्यापित करने की अनुमति देता हूँ।",
     consentCheck2: "मैं इंस्टॉलेशन हेतु परिसर सत्यापन की सहमति देता हूँ।",
     confirmOrder: "सहमति दें और ऑर्डर करें",

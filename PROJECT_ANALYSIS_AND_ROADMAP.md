@@ -561,7 +561,7 @@ To satisfy the **1-Page Data Privacy & Security Note** deliverable:
    - If an MSME selects a bundle without statutory GSTIN requirements (e.g., `P01` Biz Fibre 100), the system *does not request or require* a GST certificate.
    - Only minimum necessary identity proofs (signatory ID and site address proof) are requested.
 3. **Storage Limitation & Erasure (Section 8):**
-   - KYC documents stored in an encrypted temporary vault (AES-256) and purged 30 days after telecom provisioning completion.
+   - Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment, with a proposed 30-day purge post-activation.
    - Registry metadata retained strictly in compliance with DoT (Department of Telecommunications) statutory requirements.
 4. **Data Masking & Redaction:**
    - Signatory ID numbers, PAN strings, and bank account numbers are redacted in all application logging and customer-facing UI (e.g., displaying only the last 4 characters).

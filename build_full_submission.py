@@ -1,8 +1,10 @@
 import os
 import sys
 
-# Ensure local python_libs is prioritized
-sys.path.insert(0, os.path.abspath('./python_libs'))
+# Optional local library fallback
+libs_path = os.path.abspath('./python_libs')
+if os.path.exists(libs_path) and libs_path not in sys.path:
+    sys.path.insert(0, libs_path)
 
 import pptx
 from pptx.util import Inches, Pt
@@ -511,8 +513,8 @@ dpdp_points = [
     ("Affirmative Consent (Sec 6):", "Unbundled, explicit checkboxes in Hindi & English; immutable consent timestamp and IP hash logging."),
     ("Purpose Limitation (Sec 5):", "KYC data processed strictly for statutory telecom provisioning; zero secondary commercial monetization."),
     ("Data Minimisation (Sec 6(1)):", "No GSTIN required for retail broadband; only minimum statutory ID and supply address captured."),
-    ("Zero Cloud PII Leakage:", "100% local OCR execution; customer documents are never transmitted to external third-party AI APIs."),
-    ("Storage Limitation (Sec 8):", "Automated 30-day purge of document images post-activation; encrypted AES-256 storage."),
+    ("No External AI Forwarding:", "Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs."),
+    ("Storage Limitation (Sec 8):", "In-memory evaluation; production roadmap specifies HSM encryption and 30-day purge."),
     ("PII Masking & Sanitation:", "Signatory IDs and phone numbers masked in UI, logs, and partner views (e.g. XXXXXX9821).")
 ]
 for title, desc in dpdp_points:
@@ -1088,8 +1090,8 @@ dpdp_p = [
     ("Affirmative Consent (Sec 6):", "Unbundled checkboxes in Hindi & English; immutable consent timestamp & IP hash."),
     ("Purpose Limitation (Sec 5):", "KYC data processed strictly for statutory telecom onboarding; zero secondary use."),
     ("Data Minimisation (Sec 6(1)):", "No GSTIN required for retail broadband; only minimum statutory ID & address captured."),
-    ("Zero Cloud PII Leakage:", "100% local OCR execution; customer documents are never sent to external AI APIs."),
-    ("Storage Limitation (Sec 8):", "Automated 30-day purge of document images post-activation; encrypted vault."),
+    ("No External AI Forwarding:", "Documents are processed in memory by the hosted backend and not sent to external AI."),
+    ("Storage Limitation (Sec 8):", "In-memory evaluation; production roadmap specifies 30-day purge."),
     ("PII Masking & Sanitation:", "Signatory IDs and phone numbers masked in UI and logs (e.g. XXXXXX9821).")
 ]
 curr_y = 292

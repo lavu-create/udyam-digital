@@ -1,9 +1,9 @@
 import os
 import sys
 
-# Ensure python_libs is on sys.path
+# Ensure local python_libs is on sys.path only if present locally
 libs_path = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), "python_libs"))
-if libs_path not in sys.path:
+if os.path.exists(libs_path) and libs_path not in sys.path:
     sys.path.insert(0, libs_path)
 
 from fastapi import FastAPI, HTTPException, Request, UploadFile, File
@@ -167,7 +167,7 @@ async def check_uploaded_document(file: UploadFile = File(...)):
     if file.content_type not in allowed_types:
         raise HTTPException(status_code=400, detail=f"Unsupported file format '{file.content_type}'. Please upload PNG, JPEG or PDF.")
 
-    # 3. Local in-memory Computer Vision quality assessment (zero cloud API leakage, zero disk persistence)
+    # 3. In-memory Computer Vision quality assessment (no third-party AI API forwarding)
     quality = ocr_service.assess_image_quality(content)
     is_passed = not quality.get("is_blurry", False)
 
@@ -178,7 +178,7 @@ async def check_uploaded_document(file: UploadFile = File(...)):
         "quality_metrics": quality,
         "is_blurry": quality.get("is_blurry", False),
         "status": "PASSED" if is_passed else "FLAGGED_BLURRY",
-        "notes": "Processed 100% in local memory; no file written to persistent storage."
+        "notes": "Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment."
     }
 
 # ----------------- DPDP ACT CONSENT -----------------

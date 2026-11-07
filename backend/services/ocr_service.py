@@ -260,7 +260,7 @@ class OCRService:
             },
             "ocr_checks": {
                 "engine_status": "LOCAL_IMAGE_QUALITY_AND_SYNTHETIC_VERIFIER",
-                "notes": "Local computer vision quality analyzer (Laplacian blur variance and rotation detection) with synthetic case verification. Raster OCR text extraction is simulated via test case mapping; zero external cloud AI transmission.",
+                "notes": "Local computer vision quality analyzer (Laplacian blur variance and rotation detection) with synthetic case verification. Raster OCR text extraction is simulated via test case mapping. Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment.",
                 "gst_quality": cv_gst,
                 "bill_quality": cv_bill,
                 "bill_date": bill_date_str,

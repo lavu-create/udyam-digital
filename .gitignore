@@ -48,6 +48,15 @@ udyam_digital.db
 extracted/
 extracted/udyam_digital_data/kyc_documents/
 
+# Media & Heavy Video Deliverables (Streamed via Google Drive)
+*.mp4
+*.m4a
+*.aiff
+submission/*.mp4
+submission/*_BACKUP.*
+submission/*_FINAL.*
+submission/demo_contact_sheet.png
+
 # Logs & Temporary Files
 *.log
 *.tmp

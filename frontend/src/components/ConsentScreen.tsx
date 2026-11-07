@@ -49,8 +49,8 @@ export const ConsentScreen: React.FC<ConsentScreenProps> = ({
           {t.consentNotice}
         </p>
         <div className="pt-2 border-t border-emerald-200/60 text-[11px] text-emerald-700 flex flex-wrap gap-2">
-          <span>• 30-Day Automated Vault Purge</span>
-          <span>• Zero Cloud LLM Document Leakage</span>
+          <span>• Ephemeral In-Memory Evaluation</span>
+          <span>• No External AI API Forwarding</span>
           <span>• PII Masking Active</span>
         </div>
       </div>

@@ -37,12 +37,12 @@ The **Digital Personal Data Protection (DPDP) Act, 2023** establishes obligation
 │    (Section 6(1))        │ necessary for product pack.│ broadband; only statutory ID   │
 │                          │                            │ and supply address collected.  │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────┤
-│ 4. Storage Limitation    │ Retain personal data only  │ AES-256 encrypted temp vault;  │
-│    & Deletion (Sec 8(7)) │ as long as required.       │ automated document image purge │
-│                          │                            │ 30 days post-activation.       │
+│ 4. Storage Limitation    │ Retain personal data only  │ Ephemeral in-memory processing;│
+│    & Deletion (Sec 8(7)) │ as long as required.       │ no external AI API forwarding; │
+│                          │                            │ roadmap 30-day purge policy.   │
 ├──────────────────────────┼────────────────────────────┼────────────────────────────────┤
-│ 5. Reasonable Security   │ Protect against data leaks │ TLS 1.3 in transit; local OCR; │
-│    Safeguards (Sec 8(5)) │ or unauthorized access.    │ zero external AI PII leakage;  │
+│ 5. Reasonable Security   │ Protect against data leaks │ TLS 1.3 in transit; local CV;  │
+│    Safeguards (Sec 8(5)) │ or unauthorized access.    │ no external AI API forwarding; │
 │                          │                            │ PII masking in logs & UI.      │
 └──────────────────────────┴────────────────────────────┴────────────────────────────────┘
 ```
@@ -72,10 +72,10 @@ The **Digital Personal Data Protection (DPDP) Act, 2023** establishes obligation
 - **Selective Field Extraction:**
   - The OCR engine extracts strictly required fields: Consumer No, Supply Address, and Bill Date. Unrelated fields (such as meter reading history or tariff calculations) are discarded immediately from memory.
 
-### 3.3 Zero External PII Leakage & Local Vision Processing
-- **Critical Architecture Boundary:** **Under no circumstances are uploaded customer documents, IDs, or GST certificates transmitted to public or multi-tenant external AI/LLM APIs (e.g., public OpenAI, Gemini, or Claude endpoints).**
-- **Local OCR Engine:** Image preprocessing (Laplacian blur assessment, rotation/deskewing) and regex extraction are executed **entirely within the local application runtime**.
-- **External LLM Isolation:** The GenAI Advisor is strictly confined to business needs conversation. It never receives or processes document images or KYC payloads.
+### 3.3 No External Third-Party AI API Forwarding & In-Memory Vision Processing
+- **Critical Architecture Boundary:** Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment.
+- **Local Vision Engine:** Image preprocessing (Laplacian blur assessment, rotation/deskewing) and validation checks are executed in memory by the backend application runtime.
+- **Advisor Isolation:** The Conversational Advisor is strictly confined to business needs conversation. It never receives or processes document images or KYC payloads.
 
 ### 3.4 PII Masking & Redaction Standards
 To prevent exposure in application logs, customer service interfaces, or partner views:
@@ -85,10 +85,13 @@ To prevent exposure in application logs, customer service interfaces, or partner
 - **Log Sanitation:** A custom logging middleware inspects all outbound logs and strips JSON fields matching sensitive keys (`tax_id`, `signatory_id`, `phone`, `document_bytes`).
 
 ### 3.5 Storage Limitation & Deletion Policy (`Section 8(7)`)
-- **30-Day Encrypted Vault:**
-  - Uploaded KYC documents are stored in an AES-256 encrypted local volume.
-  - Once the order reaches the `SERVICE_ACTIVE` state, a lifecycle policy triggers automated deletion of document binary files after 30 days.
-  - Department of Telecommunications (DoT) statutory metadata (e.g., verification reference ID, registry timestamp) is retained in the operational database as required by Indian telecom licensing norms.
+- **Ephemeral In-Memory Verification (Prototype Implementation):**
+  - Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment.
+  - Raw document binary payloads are evaluated ephemerally in memory during request execution rather than written to persistent application databases.
+  - Verification tokens and audit timestamps are logged without storing raw document binary files.
+- **Production Roadmap Specification (Commercial Scale):**
+  - For commercial production rollout, documents will reside in an HSM-backed AES-256-GCM encrypted volume with a background cryptographic shredder enforcing automated hard-deletion at T+30 days post-activation (`SERVICE_ACTIVE`).
+  - Statutory Department of Telecommunications (DoT) compliance hashes will be retained in the audit ledger per telecom licensing requirements.
 
 ### 3.6 Access Control & Role-Based Authorization
 - **Customer View:** Authenticated strictly by active session or OTP-verified Order ID. Customers can only view their own order status.
