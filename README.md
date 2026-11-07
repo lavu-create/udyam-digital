@@ -3,16 +3,25 @@
 
 [![Airtel SYNC 2026](https://img.shields.io/badge/Airtel%20SYNC-2026%20Digital%20Track-E40000.svg)](https://unstop.com)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-udyam--digital.vercel.app-E40000.svg?logo=vercel)](https://udyam-digital-rho.vercel.app)
-[![GitHub Repository](https://img.shields.io/badge/GitHub-udyam--digital-181717.svg?logo=github)](https://github.com/lavu-create/udyam-digital)
-[![DPDP Act 2023](https://img.shields.io/badge/Privacy-DPDP%20Act%202023%20Aligned-059669.svg)](docs/DPDP_PRIVACY_SECURITY.md)
+[![Demo Video](https://img.shields.io/badge/Demo%20Video-Google%20Drive%20(2%3A58)-blue.svg?logo=google-drive)](https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing)
+[![DPDP Act Alignment](https://img.shields.io/badge/Privacy-DPDP%20Technical%20Alignment-059669.svg)](submission/DPDP_Privacy_Security_Note.pdf)
 [![Test Suite](https://img.shields.io/badge/Tests-18%2F18%20Passing-brightgreen.svg)](backend/tests/test_system.py)
 
-> **Built for Airtel SYNC 2026 – Digital Track (Platform Partner: Unstop)**  
-> **Live Web Application:** [https://udyam-digital-rho.vercel.app](https://udyam-digital-rho.vercel.app)  
-> **GitHub Repository:** [https://github.com/lavu-create/udyam-digital](https://github.com/lavu-create/udyam-digital)  
-> **Product Demonstration Video (Google Drive):** [https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing](https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing)  
-> **Submission Presentation Deck:** Exactly 7 Slides ([`submission/Project_Udyam_Digital.pptx`](submission/Project_Udyam_Digital.pptx) & [`submission/Project_Udyam_Digital.pdf`](submission/Project_Udyam_Digital.pdf))  
-> **Privacy Note:** 1-Page DPDP Act Technical Alignment Document ([`submission/DPDP_Privacy_Security_Note.pdf`](submission/DPDP_Privacy_Security_Note.pdf))
+**Project Udyam Digital** is an enterprise telecom onboarding platform engineered for **Airtel SYNC 2026 (Digital Track)**. It transforms complex, paper-intensive MSME customer acquisition into an intuitive, transparent 10-minute digital journey featuring rule-grounded needs discovery, sub-second synthetic registry lookups, instant dependency-validated quote generation, in-memory computer-vision document pre-checks, and simulated provisioning milestone tracking.
+
+---
+
+### Key Deliverables & Quick Access
+
+1. **Live Application:** [https://udyam-digital-rho.vercel.app](https://udyam-digital-rho.vercel.app)
+2. **Watch Final Product Demo (V3), 2:58:** [https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing](https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing)
+3. **Presentation PDF:** [`submission/Project_Udyam_Digital.pdf`](submission/Project_Udyam_Digital.pdf)
+4. **Presentation PPTX:** [`submission/Project_Udyam_Digital.pptx`](submission/Project_Udyam_Digital.pptx)
+5. **DPDP Privacy & Security Note:** [`submission/DPDP_Privacy_Security_Note.pdf`](submission/DPDP_Privacy_Security_Note.pdf)
+
+> [!IMPORTANT]
+> **Privacy & Data Handling Disclosure:**
+> Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment.
 
 ---
 
@@ -25,7 +34,7 @@ India is home to **6.3 crore Micro, Small, and Medium Enterprises (MSMEs)** cont
 
 **Project Udyam Digital** addresses manual sales bottlenecks with a **mobile-first, self-serve digital onboarding architecture**:
 - **Targeted CAC Reduction (Proposed Target):** Replaces repetitive in-person sales visits, manual paperwork pickups, and physical quote iterations with digital self-serve discovery, targeting a reduction from the baseline ₹15,053 blended acquisition cost.
-- **10-Minute Digital Onboarding (Product Vision):** An intuitive end-to-end user journey designed to compress the multi-day turnaround into a single sitting with instant catalog validation and sub-second mock registry lookups.
+- **10-Minute Digital Onboarding (Product Vision):** An intuitive end-to-end user journey designed to compress the multi-day turnaround into a single sitting with instant catalog validation and sub-second synthetic registry lookups.
 - **Projected Funnel Conversion Lift:** Aims to improve the lead-to-activation conversion from the dataset baseline of 7.36% (368 activations out of 5,000 leads) by eliminating multi-day quote delays (385 leads lost) and document collection friction (273 leads lost).
 - **DPDP Act 2023 Technical Alignment:** Demonstrates privacy-by-design engineering controls (explicit unbundled affirmative consent, purpose notices, one-way SHA-256 client IP hash logging, and in-memory document evaluation without external third-party AI API forwarding). Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment.
 
@@ -33,7 +42,7 @@ India is home to **6.3 crore Micro, Small, and Medium Enterprises (MSMEs)** cont
 
 ## 2. Solution Architecture & Technology Stack
 
-The platform is engineered as a **modular monolith** optimized for local execution without paid cloud dependencies:
+The platform is engineered as a **modular monolith** optimized for cloud serverless and local containerized execution:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
@@ -49,12 +58,12 @@ The platform is engineered as a **modular monolith** optimized for local executi
 │                                 CORE SERVICE MODULES                                    │
 │  ┌───────────────────────┐  ┌───────────────────────┐  ┌─────────────────────────────┐  │
 │  │ Catalog & Rules       │  │ AI Advisor            │  │ Smart KYC Engine            │  │
-│  │ • 25 Grounded SKUs    │  │ • Needs Discovery     │  │ • Local Laplacian Blur CV   │  │
-│  │ • 7 Dependency Rules  │  │ • Intent Matching     │  │ • Auto-Deskew Detection     │  │
+│  │ • 25 Grounded SKUs    │  │ • Needs Discovery     │  │ • Laplacian Blur CV Precheck│  │
+│  │ • 7 Dependency Rules  │  │ • Intent Matching     │  │ • Auto-Deskew Estimation    │  │
 │  │ • 10 Mandatory GSTINs │  │ • Deterministic Rules │  │ • 90-Day Bill Age Threshold │  │
 │  └───────────────────────┘  └───────────────────────┘  └─────────────────────────────┘  │
 │  ┌───────────────────────┐  ┌───────────────────────┐  ┌─────────────────────────────┐  │
-│  │ Order Fulfillment     │  │ DPDP Consent Ledger   │  │ Mock Registries             │  │
+│  │ Order Fulfillment     │  │ DPDP Consent Ledger   │  │ Synthetic Registries        │  │
 │  │ • 5-Stage Milestones  │  │ • Affirmative Opt-In  │  │ • 3,534 GSTINs Indexed      │  │
 │  │ • Technician Dispatch │  │ • SHA-256 IP Hash     │  │ • 2,723 Udyam Numbers       │  │
 │  └───────────────────────┘  └───────────────────────┘  └─────────────────────────────┘  │
@@ -62,7 +71,7 @@ The platform is engineered as a **modular monolith** optimized for local executi
                                             │ SQLite / SQLAlchemy ORM
 ┌───────────────────────────────────────────▼─────────────────────────────────────────────┐
 │                       PERSISTENCE & PRIVACY ARCHITECTURE                                │
-│      SQLite (udyam_digital.db) • In-Memory Assessment (No Third-Party AI Forwarding)    │
+│      SQLite (udyam_digital.db) • In-Memory Evaluation (No Third-Party AI Forwarding)   │
 └─────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -71,7 +80,7 @@ The platform is engineered as a **modular monolith** optimized for local executi
 ## 3. Core Feature Walkthrough (The 12-Screen Journey)
 
 1. **Landing Page:** Value proposition, verified baseline funnel metrics (₹15,053 blended CAC, 17.62-day average velocity, 7.36% activation rate), and call-to-action.
-2. **Bilingual Switcher:** Instant, zero-latency toggling between **English** and **हिंदी** across all UI elements.
+2. **Bilingual Switcher:** Instant toggling between **English** and **हिंदी** across all UI elements.
 3. **Business Profile:** Business segment selector (Retail, Healthcare Clinic, Multi-Site, Manufacturing), staff slider, and city tier.
 4. **Conversational AI Advisor:** WhatsApp-style interactive chat with quick suggestion chips and deterministic, rule-grounded recommendations without external LLM API dependencies.
 5. **Tailored Bundles:** 3 pre-configured transparent packages:
@@ -79,14 +88,14 @@ The platform is engineered as a **modular monolith** optimized for local executi
    - *Growth / Clinic Practice:* 300 Mbps Fibre + Static IP + Cloud CCTV + Cloud Backup → **₹2,597/mo**
    - *Pro / Multi-Site Office:* 1 Gbps Enterprise Fibre + SD-WAN + Cloud Telephony + Firewall → **₹6,896/mo**
 6. **Interactive Quote Builder:** Live toggle for add-ons, dependency validation (e.g. SD-WAN requires broadband base), statutory GSTIN indicator, and consolidated monthly price.
-7. **Instant Registry Lookups:** Sub-second verification against indexed mock GSTIN (3,534 records) and Udyam (2,723 records).
+7. **Instant Synthetic Registry Lookups:** Sub-second verification against indexed synthetic GSTIN (3,534 records) and Udyam (2,723 records) datasets.
 8. **Smart KYC & Computer Vision:**
    - Real **Laplacian variance blur pre-check** (`K04` trapped).
-   - Dimension-based **rotation & skew detector** (`K02` trapped).
+   - Dimension-based **rotation & skew estimation** (`K02` trapped).
    - Utility bill **90-day expiry threshold** against case anchor `2026-07-15` (`K11` trapped).
    - Character mismatch detector (`K06` trapped) and legal name mismatch detector (`K07` trapped).
    - Synthetic test harness evaluating all scenarios `K01`–`K12` directly in memory without external third-party AI transmission.
-9. **DPDP Act 2023 Consent:** Standalone unbundled checkboxes, purpose specification, ISO 8601 UTC timestamp, and SHA-256 IP hashing.
+9. **DPDP Act 2023 Technical Alignment:** Standalone unbundled checkboxes, purpose specification, ISO 8601 UTC timestamp, and SHA-256 IP hashing.
 10. **Order Confirmation:** Instant generation of Order ID (`ORD-2026-XXXX`).
 11. **Real-Time Order Tracker:** Visual 5-stage progress milestone timeline with simulated field technician attribution (*Simulated Field Tech, Demo Node #402, +91 98000 00000*).
 12. **Milestone Simulation:** Interactive button to advance order milestones in real time.
@@ -118,7 +127,7 @@ cd ..
 # 4. Launch unified server (FastAPI serves compiled frontend from frontend/dist)
 python3 -m uvicorn backend.main:app --host 0.0.0.0 --port 8000
 ```
-Open **[http://localhost:8000](http://localhost:8000)** in your browser!
+Open **[http://localhost:8000](http://localhost:8000)** in your browser.
 
 ### Option B: Development Mode (Hot Reloading)
 
@@ -132,7 +141,7 @@ cd frontend
 npm ci
 npm run dev
 ```
-Open **[http://localhost:5173](http://localhost:5173)** in your browser!
+Open **[http://localhost:5173](http://localhost:5173)** in your browser.
 
 ### Option C: Docker Containerization
 
@@ -152,7 +161,7 @@ Open **[http://localhost:8000](http://localhost:8000)**.
 The project includes pre-configured deployment blueprints:
 - **Vercel Serverless (Live):** Deployed at **[https://udyam-digital-rho.vercel.app](https://udyam-digital-rho.vercel.app)** with `vercel.json` routing and `api/index.py` serverless ASGI bridge.
 - **Render Web Service:** One-click deployment via `render.yaml` Blueprint using the root `Dockerfile`.
-- **Database Persistence Note:** In serverless runtime environments (such as Vercel AWS Lambda), the SQLite database initializes safely in the writable `/tmp` scratch filesystem (`/tmp/udyam_digital.db`). For persistent multi-instance production, the connection string seamlessly accepts standard PostgreSQL (`DATABASE_URL`).
+- **Database Persistence Note:** In serverless runtime environments (such as Vercel AWS Lambda), the SQLite database initializes in the writable `/tmp` scratch filesystem (`/tmp/udyam_digital.db`). For persistent multi-instance production, the connection string seamlessly accepts standard PostgreSQL (`DATABASE_URL`).
 
 ---
 
@@ -214,8 +223,8 @@ ALL 18 ARCHITECTURAL ASSERTION TESTS PASSED!
 | `POST /api/v1/catalog/validate-quote` | `POST` | Validate product dependencies & GSTIN requirements |
 | `POST /api/v1/advisor/chat` | `POST` | Conversational bilingual advisor with suggestion chips |
 | `POST /api/v1/advisor/recommend` | `POST` | Grounded bundle recommendation for business segment |
-| `GET /api/v1/registry/gstin/{gstin}` | `GET` | Fast lookup in 3,534 mock GSTIN records |
-| `GET /api/v1/registry/udyam/{udyam_number}` | `GET` | Fast lookup in 2,723 mock Udyam records |
+| `GET /api/v1/registry/gstin/{gstin}` | `GET` | Fast lookup in 3,534 synthetic GSTIN records |
+| `GET /api/v1/registry/udyam/{udyam_number}` | `GET` | Fast lookup in 2,723 synthetic Udyam records |
 | `POST /api/v1/kyc/verify-pack` | `POST` | Smart KYC engine validating K01–K12 scenarios |
 | `POST /api/v1/consent/record` | `POST` | DPDP affirmative consent capture & IP hashing |
 | `POST /api/v1/orders/create` | `POST` | Create order, generate Order ID, dispatch technician |
@@ -229,9 +238,9 @@ ALL 18 ARCHITECTURAL ASSERTION TESTS PASSED!
 | Module | Implemented in Current MVP | Planned for Production Phase |
 |---|---|---|
 | **Catalog Engine** | 25 SKUs loaded, 7 dependency rules, 10 GSTIN rules | Dynamic ERP pricing sync via SAP/Ariba API |
-| **Advisor** | WhatsApp-style chat, bilingual EN/HI, deterministic fallback | Real-time speech-to-speech STT/TTS in 11 Indian languages |
-| **KYC & OCR** | Local CV (Laplacian blur, auto-deskew, bill age check, K01-K12) | Government Sandbox live GSTIN/MCA21 webhooks |
-| **DPDP Compliance** | Affirmative consent checkboxes, SHA-256 IP hash, audit logs | Automated crypto-vault shredder with HSM keys (Production Roadmap) |
+| **Advisor** | WhatsApp-style chat, bilingual EN/HI, deterministic rule matching | Real-time speech-to-speech STT/TTS in 11 Indian languages |
+| **KYC & CV** | In-memory CV (Laplacian blur, auto-deskew, bill age check, K01-K12) | Government Sandbox live GSTIN/MCA21 webhooks & OCR pipeline |
+| **DPDP Alignment** | Affirmative consent checkboxes, SHA-256 IP hash, audit logs | Production cryptographic envelope encryption & HSM key management |
 | **Order Tracking** | 5 visual milestones, technician card, simulated status advance | Field Force GPS live technician vehicle tracking on map |
 | **Partner Console** | Architectural specification & attribution QR schema | Production dealer portal with drop-recovery pipeline |
 
@@ -239,16 +248,16 @@ ALL 18 ARCHITECTURAL ASSERTION TESTS PASSED!
 
 ## 8. Technical Disclosures, Disclaimers & Known Limitations
 
-1. **Local Computer Vision vs. Production OCR:**  
-   The platform implements genuine local computer vision algorithms using NumPy and Pillow for **Laplacian blur variance measurement** (threshold 250.0), **skew and orientation estimation**, and **statutory utility bill freshness validation** against the case anchor date (`2026-07-15`). Full raster OCR text extraction is simulated against known benchmark test profiles (`K01`–`K12`) because heavy native neural OCR engines (such as Tesseract or Apple Vision) are not bundled in this offline sandbox. Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment.
+1. **Computer Vision Evaluation vs. Production OCR:**
+   The platform implements genuine computer vision algorithms using NumPy and Pillow for **Laplacian blur variance measurement** (threshold 250.0), **skew and orientation estimation**, and **statutory utility bill freshness validation** against the case anchor date (`2026-07-15`). Full raster OCR text extraction is simulated against known benchmark test profiles (`K01`–`K12`) because heavy native neural OCR engines (such as Tesseract or Apple Vision) are not bundled in this offline sandbox. Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment.
 
-2. **Simulated Provisioning & Demonstration Data:**  
+2. **Simulated Provisioning & Demonstration Data:**
    Order milestone progression (`KYC_VERIFIED` → `FEASIBILITY_CLEARED` → `EQUIPMENT_DISPATCHED` → `INSTALLATION_SCHEDULED` → `SERVICE_ACTIVE`), technician attribution (*Simulated Field Tech, Demo Node #402*), and appointment times are interactive demonstration simulations. Real-world carrier activation would interface with Airtel's production OSS/BSS and field workforce management systems.
 
-3. **Statutory Privacy Scope (DPDP Act, 2023):**  
-   The architecture demonstrates concrete **software engineering controls** (unbundled affirmative consent checkboxes, one-way SHA-256 IP hash logging, and in-memory evaluation without external third-party AI API forwarding) aligned with the statutory principles of India's *Digital Personal Data Protection (DPDP) Act, 2023*. Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment. Proposed production features such as Hardware Security Module (HSM) envelope encryption (AES-256-GCM) and automated cryptographic shredding are architectural roadmap specifications for commercial rollout, not implemented code assertions in this demonstration prototype. This constitutes a technical architectural blueprint and prototype implementation, not formal legal certification.
+3. **Statutory Privacy Scope (DPDP Act, 2023):**
+   The architecture demonstrates concrete **software engineering controls** (unbundled affirmative consent checkboxes, one-way SHA-256 IP hash logging, and in-memory evaluation without external third-party AI API forwarding) aligned with the statutory principles of India's *Digital Personal Data Protection (DPDP) Act, 2023*. Documents are processed in memory by the hosted backend and are not forwarded to external third-party AI APIs. Production deployment requires further security and retention assessment. Proposed production features such as Hardware Security Module (HSM) envelope encryption and cryptographic data lifecycles are architectural roadmap specifications for commercial rollout, not implemented code assertions in this demonstration prototype. This constitutes a technical architectural blueprint and prototype implementation, not formal legal certification.
 
-4. **Synthetic Registries & Case Dataset Attribution:**  
+4. **Synthetic Registries & Case Dataset Attribution:**
    The application queries indexed synthetic benchmarks (`mock_gstin_registry.csv` with 3,534 records and `mock_udyam_registry.csv` with 2,723 records) provided by the Airtel SYNC 2026 hackathon case package, rather than live production government GSTN or MCA21 endpoints. All applicant records and company names are synthetic demonstration fixtures.
 
 ---
@@ -283,4 +292,3 @@ ALL 18 ARCHITECTURAL ASSERTION TESTS PASSED!
 - **Platform Partner:** Unstop
 - **Project Lead:** Project Udyam Digital Team
 - **Case Reference:** Enterprise Track A (Author: Ankit Srivastava)
-
