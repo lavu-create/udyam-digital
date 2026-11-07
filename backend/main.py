@@ -237,8 +237,8 @@ if frontend_dist:
 
     @app.exception_handler(404)
     async def spa_404_handler(request: Request, exc: Exception):
-        if request.url.path.startswith("/api/"):
-            return JSONResponse(status_code=404, content={"detail": f"API route '{request.url.path}' not found"})
+        if request.url.path.startswith("/api/") or request.url.path.startswith("/assets/"):
+            return JSONResponse(status_code=404, content={"detail": f"Resource '{request.url.path}' not found"})
         index_file = os.path.join(frontend_dist, "index.html")
         if os.path.exists(index_file):
             return FileResponse(index_file)
