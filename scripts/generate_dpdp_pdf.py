@@ -1,8 +1,12 @@
 import os
 import sys
 
+# Determine repository root whether invoked from root or from scripts/ directory
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..")) if os.path.basename(SCRIPT_DIR) == "scripts" else SCRIPT_DIR
+
 # Optional local library fallback
-libs_path = os.path.abspath("./python_libs")
+libs_path = os.path.join(REPO_ROOT, "python_libs")
 if os.path.exists(libs_path) and libs_path not in sys.path:
     sys.path.insert(0, libs_path)
 
@@ -13,7 +17,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 
-pdf_path = "submission/DPDP_Privacy_Security_Note.pdf"
+pdf_path = os.path.join(REPO_ROOT, "submission", "DPDP_Privacy_Security_Note.pdf")
 doc = SimpleDocTemplate(
     pdf_path,
     pagesize=letter,

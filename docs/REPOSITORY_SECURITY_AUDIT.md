@@ -34,7 +34,7 @@ The repository currently tracks 60 files across code, configuration, documentati
 | **Datasets** | `data/product_catalogue.csv`, `data/mock_gstin_registry.csv`, `data/mock_udyam_registry.csv` | **VERIFIED SYNTHETIC.** All company names and addresses are mock demonstration entities. |
 | **Submission Files** | `submission/Project_Udyam_Digital.pptx` (1.31 MB), `submission/Project_Udyam_Digital.pdf` (1.64 MB), `submission/DPDP_Privacy_Security_Note.pdf` (5.3 KB), `submission/github_qr.png` | **CLEAN.** Preserved within the 20 MB hackathon limit. Zero private metadata. |
 | **Documentation** | `README.md`, `SECURITY.md`, `docs/*.md` | **AUDITED.** Corrected all unsupported percentage claims, clarified simulations, and removed broken badges. |
-| **Build Scripts** | `build_full_submission.py`, `generate_dpdp_pdf.py` | **FLAGGED (MEDIUM).** Standalone generator scripts referencing optional build dependencies. Outputs are already generated and tracked. |
+| **Build Scripts** | `scripts/build_presentation.py`, `scripts/generate_dpdp_pdf.py` | **ORGANIZED.** Consolidated into `scripts/`. Pre-compiled outputs are tracked in `submission/`. |
 
 ---
 
@@ -68,14 +68,15 @@ A deep commit-by-commit diff audit was performed across all three repository com
 
 ## 5. Review of Build & Standalone Scripts
 
-The repository contains two standalone generation scripts:
-- **`build_full_submission.py` (1,280 lines):** Used to generate the 7-slide PPTX and PDF from scratch using `python-pptx`, `reportlab`, and `pypdf`. It references an uncommitted competition template path (`extracted/airtel_sync/Submission Template_Sync.pptx`).
-- **`generate_dpdp_pdf.py` (213 lines):** Used to generate the 1-page DPDP compliance note using `reportlab`.
+The repository consolidates optional standalone generation tooling into `scripts/`:
+- **`scripts/build_presentation.py`:** Generates the official 7-slide PPTX and matching PDF from scratch, embedding verified resource hyperlinks and QR codes.
+- **`scripts/generate_dpdp_pdf.py`:** Generates the 1-page DPDP compliance note using ReportLab.
+- Legacy draft `build_full_submission.py` has been superseded and archived locally.
 
 ### Assessment:
-1. Both scripts have completed their purpose: the resulting presentation and note files already exist in `submission/`.
-2. A third party cloning the repository cannot run `build_full_submission.py` directly because `extracted/` is intentionally excluded from Git.
-3. **Recommendation:** Relocate these scripts to an optional `scripts/` directory or archive them, keeping only the final compiled outputs in `submission/`.
+1. Both scripts produce reproducible artifacts; their official compiled outputs are tracked in `submission/`.
+2. A third party cloning the repository can run `scripts/generate_dpdp_pdf.py` directly; running `scripts/build_presentation.py` requires competition template fixtures.
+3. Pre-compiled deliverables are preserved and tracked in `submission/`.
 
 ---
 
@@ -103,9 +104,8 @@ The repository contains two standalone generation scripts:
 #### HIGH (0 Issues)
 - No personal documents, identity scans, or unencrypted database files found in Git.
 
-#### MEDIUM (1 Issue)
-- **Standalone Build Scripts:** `build_full_submission.py` and `generate_dpdp_pdf.py` sit in the root directory and require uncommitted templates to run.
-  - *Proposed Action:* Move to `scripts/` with a README explaining that `submission/` already holds the pre-compiled deliverables, or leave them as documented utilities.
+#### REMEDIATED
+- **Standalone Build Scripts:** Relocated to `scripts/build_presentation.py` and `scripts/generate_dpdp_pdf.py` with compiled deliverables tracked in `submission/`. Legacy drafts archived locally.
 
 #### LOW (2 Issues)
 - **Local Committer Identity:** Commits `378a606`, `afc0e02`, and `e2aba2d` contain `@Lavanya-MacBook-Air.local` in committer email metadata.

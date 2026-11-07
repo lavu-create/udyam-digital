@@ -57,6 +57,11 @@ submission/*_BACKUP.*
 submission/*_FINAL.*
 submission/demo_contact_sheet.png
 
+# Internal Working Documents & Legacy Backups
+PROJECT_ANALYSIS_AND_ROADMAP.md
+build_full_submission.py
+*.bak
+
 # Logs & Temporary Files
 *.log
 *.tmp

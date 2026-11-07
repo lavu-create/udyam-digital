@@ -1,8 +1,12 @@
 import os
 import sys
 
+# Determine repository root whether invoked from root or from scripts/ directory
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..")) if os.path.basename(SCRIPT_DIR) == "scripts" else SCRIPT_DIR
+
 # Optional local library fallback
-libs_path = os.path.abspath('./python_libs')
+libs_path = os.path.join(REPO_ROOT, "python_libs")
 if os.path.exists(libs_path) and libs_path not in sys.path:
     sys.path.insert(0, libs_path)
 
@@ -18,10 +22,11 @@ from reportlab.lib import colors
 import pypdf
 import qrcode
 
-os.makedirs('submission', exist_ok=True)
+submission_dir = os.path.join(REPO_ROOT, 'submission')
+os.makedirs(submission_dir, exist_ok=True)
 
-pptx_out = 'submission/Project_Udyam_Digital_FINAL.pptx'
-pdf_out = 'submission/Project_Udyam_Digital_FINAL.pdf'
+pptx_out = os.path.join(submission_dir, 'Project_Udyam_Digital.pptx')
+pdf_out = os.path.join(submission_dir, 'Project_Udyam_Digital.pdf')
 
 # Brand Colors (Airtel SYNC Guidelines)
 RED = RGBColor(228, 0, 0)            # #E40000
@@ -51,10 +56,14 @@ URL_GITHUB = "https://github.com/lavu-create/udyam-digital"
 URL_DEMO_VIDEO = "https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing"
 
 # Generate High-Resolution QR Codes
+qr_live_app_path = os.path.join(submission_dir, "qr_live_app.png")
+qr_github_path = os.path.join(submission_dir, "qr_github.png")
+qr_demo_video_path = os.path.join(submission_dir, "qr_demo_video.png")
+
 qr_specs = [
-    ("submission/qr_live_app.png", URL_LIVE_APP),
-    ("submission/qr_github.png", URL_GITHUB),
-    ("submission/qr_demo_video.png", URL_DEMO_VIDEO),
+    (qr_live_app_path, URL_LIVE_APP),
+    (qr_github_path, URL_GITHUB),
+    (qr_demo_video_path, URL_DEMO_VIDEO),
 ]
 
 for qr_file, url_val in qr_specs:
@@ -75,7 +84,7 @@ print("\nStarting generation of official 7-slide final submission deck...")
 # -------------------------------------------------------------
 # PART 1: GENERATE PPTX VIA PYTHON-PPTX
 # -------------------------------------------------------------
-template_path = 'extracted/airtel_sync/Submission Template_Sync.pptx'
+template_path = os.path.join(REPO_ROOT, 'extracted', 'airtel_sync', 'Submission Template_Sync.pptx')
 prs = pptx.Presentation(template_path)
 prs.slide_width = Inches(10.0)
 prs.slide_height = Inches(5.625)
@@ -84,7 +93,8 @@ slide1 = prs.slides[0]
 slide2 = prs.slides[1]
 
 blank_layout = prs.slide_layouts[6]
-content_bg = 'extracted/pptx_media/ppt/media/image1.jpg'
+content_bg = os.path.join(REPO_ROOT, 'extracted', 'pptx_media', 'ppt', 'media', 'image1.jpg')
+title_bg = os.path.join(REPO_ROOT, 'extracted', 'pptx_media', 'ppt', 'media', 'image2.jpg')
 
 for _ in range(5):
     s = prs.slides.add_slide(blank_layout)
@@ -765,21 +775,21 @@ resources_data = [
         "title": "LIVE APPLICATION",
         "label": "Explore the Live Prototype",
         "url": URL_LIVE_APP,
-        "qr": "submission/qr_live_app.png",
+        "qr": qr_live_app_path,
         "x": Inches(5.05)
     },
     {
         "title": "SOURCE CODE",
         "label": "Explore the GitHub Repository",
         "url": URL_GITHUB,
-        "qr": "submission/qr_github.png",
+        "qr": qr_github_path,
         "x": Inches(6.50)
     },
     {
         "title": "PRODUCT DEMO",
         "label": "Watch the 3-Minute Product Demo",
         "url": URL_DEMO_VIDEO,
-        "qr": "submission/qr_demo_video.png",
+        "qr": qr_demo_video_path,
         "x": Inches(7.95)
     }
 ]
@@ -866,7 +876,7 @@ def draw_header_pdf(c, tag, title, subtitle):
     c.drawString(95, 342, subtitle)
 
 # --- PDF PAGE 1: TITLE SLIDE ---
-c.drawImage('extracted/pptx_media/ppt/media/image2.jpg', 0, 0, width=720, height=405)
+c.drawImage(title_bg, 0, 0, width=720, height=405)
 
 c.setFont('Helvetica-Bold', 7.5)
 c.setFillColor(HEX_RED)
@@ -908,7 +918,7 @@ c.drawString(45, 38, "Empowering 6.3 Crore MSMEs | Addressing 17.6-day sales cyc
 c.showPage()
 
 # --- PDF PAGE 2: PROBLEM & DATA OPPORTUNITY ---
-c.drawImage('extracted/pptx_media/ppt/media/image1.jpg', 0, 0, width=720, height=405)
+c.drawImage(content_bg, 0, 0, width=720, height=405)
 draw_header_pdf(c, "The MSME Acquisition Bottleneck", 
                "Current MSME Acquisition: High Friction, Low Conversion", 
                "Forensic analysis of 5,000 SMB leads reveals a broken sales cycle where 92.6% of interested leads drop out.")
@@ -971,7 +981,7 @@ c.drawString(370, 70, "manual sales scheduling and documentation friction.")
 c.showPage()
 
 # --- PDF PAGE 3: OUR SOLUTION ---
-c.drawImage('extracted/pptx_media/ppt/media/image1.jpg', 0, 0, width=720, height=405)
+c.drawImage(content_bg, 0, 0, width=720, height=405)
 draw_header_pdf(c, "Core Product Architecture",
                "Project Udyam Digital: Architecture of Frictionless Acquisition",
                "Replacing multi-week sales cycles with an intelligent, self-service single-sitting onboarding journey.")
@@ -1033,7 +1043,7 @@ c.drawString(55, 80, "QR codes and drop-recovery queues. Partners earn full recu
 c.showPage()
 
 # --- PDF PAGE 4: PRODUCT EXPERIENCE ---
-c.drawImage('extracted/pptx_media/ppt/media/image1.jpg', 0, 0, width=720, height=405)
+c.drawImage(content_bg, 0, 0, width=720, height=405)
 draw_header_pdf(c, "User Experience & Prototype Design",
                "Intuitive, Mobile-First Prototype Experience",
                "Proposed prototype screen designs engineered for 375px mobile viewports with bilingual Hindi/English support.")
@@ -1075,7 +1085,7 @@ c.drawString(45, 45, "* Proposed prototype interface specifications. Designed fo
 c.showPage()
 
 # --- PDF PAGE 5: TECHNICAL ARCHITECTURE & TRUST ---
-c.drawImage('extracted/pptx_media/ppt/media/image1.jpg', 0, 0, width=720, height=405)
+c.drawImage(content_bg, 0, 0, width=720, height=405)
 draw_header_pdf(c, "System Architecture & Privacy",
                "Modular Monolith Architecture with Privacy-by-Design",
                "Decoupled FastAPI backend, local vision image-quality pre-checks, and DPDP Act 2023 technical alignment.")
@@ -1131,7 +1141,7 @@ for idx, (title, desc) in enumerate(dpdp_points):
 c.showPage()
 
 # --- PDF PAGE 6: UNIT ECONOMICS & VALUE CREATION ---
-c.drawImage('extracted/pptx_media/ppt/media/image1.jpg', 0, 0, width=720, height=405)
+c.drawImage(content_bg, 0, 0, width=720, height=405)
 draw_header_pdf(c, "Unit Economics & Value Creation",
                "Sustainable Unit Economics & Quantified Business Impact",
                "Targeting customer acquisition cost optimization while accelerating self-serve conversion and recurring ARPU.")
@@ -1182,7 +1192,7 @@ for idx, (title, sub, desc) in enumerate(v_pillars):
 c.showPage()
 
 # --- PDF PAGE 7: EXECUTION ROADMAP & RESOURCES ---
-c.drawImage('extracted/pptx_media/ppt/media/image1.jpg', 0, 0, width=720, height=405)
+c.drawImage(content_bg, 0, 0, width=720, height=405)
 draw_header_pdf(c, "Roadmap & Strategic Vision",
                "90-Day Execution Roadmap & Vision for India's MSMEs",
                "Structured rollout roadmap delivering enterprise-scale digital adoption across Tier 1 and Tier 2 clusters.")
@@ -1258,21 +1268,21 @@ pdf_res_data = [
         "title": "LIVE APPLICATION",
         "label": "Explore the Live Prototype",
         "url": URL_LIVE_APP,
-        "qr": "submission/qr_live_app.png",
+        "qr": qr_live_app_path,
         "x": 365
     },
     {
         "title": "SOURCE CODE",
         "label": "Explore the GitHub Repository",
         "url": URL_GITHUB,
-        "qr": "submission/qr_github.png",
+        "qr": qr_github_path,
         "x": 467
     },
     {
         "title": "PRODUCT DEMO",
         "label": "Watch the 3-Minute Product Demo",
         "url": URL_DEMO_VIDEO,
-        "qr": "submission/qr_demo_video.png",
+        "qr": qr_demo_video_path,
         "x": 569
     }
 ]
