@@ -1,9 +1,9 @@
 # Project Udyam Digital
 ## India's MSME Connectivity Journey, Simplified
 
-[![Airtel SYNC 2026](https://img.shields.io/badge/Airtel%20SYNC-2026%20Digital%20Track-E40000.svg)](https://unstop.com)
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-udyam--digital.vercel.app-E40000.svg?logo=vercel)](https://udyam-digital-rho.vercel.app)
-[![Demo Video](https://img.shields.io/badge/Demo%20Video-Google%20Drive%20(2%3A58)-blue.svg?logo=google-drive)](https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing)
+[![Airtel SYNC 2026](https://img.shields.io/badge/Airtel%20SYNC-2026%20Digital%20Track-E40000.svg)](https://unstop.com/competitions/crp-airtel-sync-2026-digital-track-airtel-sync-2026-airtel-1766609)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-udyam--digital.vercel.app-E40000.svg?logo=vercel)](https://udyam-digital-rho.vercel.app/)
+[![Demo Video](https://img.shields.io/badge/Demo%20Video-Google%20Drive%20(2%3A58)-blue.svg?logo=google-drive)](https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view)
 [![DPDP Act Alignment](https://img.shields.io/badge/Privacy-DPDP%20Technical%20Alignment-059669.svg)](submission/DPDP_Privacy_Security_Note.pdf)
 [![Test Suite](https://img.shields.io/badge/Tests-18%2F18%20Passing-brightgreen.svg)](backend/tests/test_system.py)
 
@@ -14,7 +14,7 @@
 ### Key Deliverables & Quick Access
 
 1. **Live Application:** [https://udyam-digital-rho.vercel.app](https://udyam-digital-rho.vercel.app)
-2. **Watch Final Product Demo (V3), 2:58:** [https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing](https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing)
+2. **Watch Final Product Demo:** [https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing](https://drive.google.com/file/d/1fxyMlvrPGGqDVeVV4CQsYVr7FWekat4_/view?usp=sharing)
 3. **Presentation PDF:** [`submission/Project_Udyam_Digital.pdf`](submission/Project_Udyam_Digital.pdf)
 4. **Presentation PPTX:** [`submission/Project_Udyam_Digital.pptx`](submission/Project_Udyam_Digital.pptx)
 5. **DPDP Privacy & Security Note:** [`submission/DPDP_Privacy_Security_Note.pdf`](submission/DPDP_Privacy_Security_Note.pdf)
